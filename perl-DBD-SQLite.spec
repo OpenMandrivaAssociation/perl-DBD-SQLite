@@ -14,6 +14,7 @@ Group:		Development/Perl
 BuildRequires:	perl-devel
 BuildRequires:	perl(DBI) >= 1.03-1mdk
 BuildRequires:  sqlite3-devel	
+Buildroot:	%{_tmppath}/%{name}-%{version}
 
 %description
 SQLite is a small fast embedded SQL database engine.
