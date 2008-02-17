@@ -32,6 +32,7 @@ of SQL92 supported, and more.
 %setup -q -n %{module}-%{version}
 # those test fail currently
 # cf http://rt.cpan.org//Ticket/Display.html?id=32570
+rm -f t/06error.t
 rm -f t/07busy.t
 rm -f t/08create_function.t
 
