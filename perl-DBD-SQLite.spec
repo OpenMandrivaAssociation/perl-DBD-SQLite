@@ -1,7 +1,7 @@
 %define module	DBD-SQLite
 %define name	perl-%{module}
 %define version	1.14
-%define release	%mkrel 4
+%define release	%mkrel 5
 
 Name:		%{name}
 Version:	%{version}
@@ -10,6 +10,7 @@ Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
 URL:		http://search.cpan.org/dist/%{module}/
 Source:		ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{module}-%{version}.tar.bz2
+Patch:      perl-DBD-SQLite-1.14-fix-tests.patch
 Group:		Development/Perl
 BuildRequires:	perl-devel
 BuildRequires:	perl(DBI) >= 1.03-1mdk
@@ -30,6 +31,7 @@ of SQL92 supported, and more.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch -p 1
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
