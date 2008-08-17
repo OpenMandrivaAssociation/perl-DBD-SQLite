@@ -10,6 +10,7 @@ Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
 URL:		http://search.cpan.org/dist/%{module}/
 Source:		ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{module}-%{version}.tar.bz2
+# http://rt.cpan.org/Public/Bug/Display.html?id=32100
 Patch:      perl-DBD-SQLite-1.14-fix-tests.patch
 Group:		Development/Perl
 BuildRequires:	perl-devel
