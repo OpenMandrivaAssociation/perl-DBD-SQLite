@@ -1,7 +1,7 @@
 %define module	DBD-SQLite
 %define name	perl-%{module}
 %define version	1.14
-%define release	%mkrel 5
+%define release	%mkrel 6
 
 Name:		%{name}
 Version:	%{version}
