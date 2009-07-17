@@ -1,20 +1,20 @@
-%define module	DBD-SQLite
-%define name	perl-%{module}
-%define version	1.25
-%define release	%mkrel 1
+%define upstream_name	 DBD-SQLite
+%define upstream_version 1.25
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	%mkrel 1
+
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
-URL:		http://search.cpan.org/dist/%{module}/
-Source:		ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{module}-%{version}.tar.gz
 Group:		Development/Perl
+URL:		http://search.cpan.org/dist/%{upstream_name}/
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildRequires:	perl-devel
-BuildRequires:	perl(DBI) >= 1.03-1mdk
+BuildRequires:	perl(DBI) >= 1.30.0
 BuildRequires:  sqlite3-devel	
-Buildroot:	%{_tmppath}/%{name}-%{version}
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 SQLite is a small fast embedded SQL database engine.
@@ -29,7 +29,7 @@ commit and rollback), indexes, DBA-free operation, a large subset
 of SQL92 supported, and more.
 
 %prep
-%setup -q -n %{module}-%{version}
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -51,6 +51,4 @@ rm -rf %{buildroot}
 %{perl_vendorarch}/DBD
 %{perl_vendorarch}/auto/DBD
 %{_mandir}/*/*
-
-
 
