@@ -1,5 +1,5 @@
 %define upstream_name	 DBD-SQLite
-%define upstream_version 1.25
+%define upstream_version 1.27
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
