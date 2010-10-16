@@ -1,9 +1,9 @@
 %define upstream_name	 DBD-SQLite
-%define upstream_version 1.29
+%define upstream_version 1.31
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	%mkrel 4
+Release:	%mkrel 1
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
@@ -41,6 +41,10 @@ of SQL92 supported, and more.
 %install
 rm -rf %{buildroot}
 %makeinstall_std
+
+# useless content
+rm -f %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.c
+rm -f %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.h
 
 %clean
 rm -rf %{buildroot}
