@@ -1,9 +1,9 @@
 %define upstream_name	 DBD-SQLite
-%define upstream_version 1.31
+%define upstream_version 1.33
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	%mkrel 2
+Release:	%mkrel 1
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
