@@ -15,6 +15,8 @@ BuildRequires:	perl-devel
 BuildRequires:	perl(DBI) >= 1.30.0
 BuildRequires:  sqlite3-devel	
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
+# temporary dep due to the perl-5.14 bump
+BuildRequires:  perl-List-MoreUtils >= 0.320.0-4
 
 %description
 SQLite is a small fast embedded SQL database engine.
