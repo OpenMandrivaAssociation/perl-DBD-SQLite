@@ -10,9 +10,13 @@ License:	GPL
 Group:		Development/Perl
 URL:		http://search.cpan.org/dist/%{upstream_name}/
 Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}.tar.gz
-
 BuildRequires:	perl-devel
 BuildRequires:	perl(DBI) >= 1.616.0-5
+BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	perl(File::Spec) >= 0.820.0
+BuildRequires:	perl(Test::Builder) >= 0.860.0
+BuildRequires:	perl(Test::More) >= 0.470.0
+BuildRequires:	perl(Tie::Hash)
 BuildRequires:  sqlite3-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
 
