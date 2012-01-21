@@ -1,9 +1,9 @@
 %define upstream_name	 DBD-SQLite
-%define upstream_version 1.33
+%define upstream_version 1.35
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	%mkrel 2
+Release:	%mkrel 1
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
@@ -12,11 +12,9 @@ URL:		http://search.cpan.org/dist/%{upstream_name}/
 Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}.tar.gz
 
 BuildRequires:	perl-devel
-BuildRequires:	perl(DBI) >= 1.30.0
-BuildRequires:  sqlite3-devel	
+BuildRequires:	perl(DBI) >= 1.616.0-5
+BuildRequires:  sqlite3-devel
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
-# temporary dep due to the perl-5.14 bump
-BuildRequires:  perl-List-MoreUtils >= 0.320.0-4
 
 %description
 SQLite is a small fast embedded SQL database engine.
