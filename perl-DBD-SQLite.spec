@@ -1,15 +1,15 @@
 %define upstream_name	 DBD-SQLite
-%define upstream_version 1.35
+%define upstream_version 1.36
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	%mkrel 3
+Release:	%mkrel 0.1
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
 Group:		Development/Perl
 URL:		http://search.cpan.org/dist/%{upstream_name}/
-Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}.tar.gz
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}_01.tar.gz
 BuildRequires:	perl-devel
 BuildRequires:	perl(DBI) >= 1.616.0-5
 BuildRequires:	perl(ExtUtils::MakeMaker)
@@ -33,7 +33,7 @@ commit and rollback), indexes, DBA-free operation, a large subset
 of SQL92 supported, and more.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{upstream_version}_01
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
