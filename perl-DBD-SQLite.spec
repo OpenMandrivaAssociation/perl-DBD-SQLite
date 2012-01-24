@@ -39,11 +39,11 @@ of SQL92 supported, and more.
 rm -f sqlite3.c sqlite3.h
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor LIBS="-lsqlite3"
+%{__perl} Makefile.PL INSTALLDIRS=vendor LIBS="-L%{_libdir} -lsqlite3"
 %make CCFLAGS="%{optflags} -DNDEBUG=1 -DSQLITE_PTR_SZ=4"
 
 %check
-%{__make} test
+%{__make} test LIBS="-L%{_libdir} -lsqlite3"
 
 %install
 rm -rf %{buildroot}
