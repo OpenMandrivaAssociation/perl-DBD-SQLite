@@ -17,7 +17,7 @@ BuildRequires:	perl(File::Spec) >= 0.820.0
 BuildRequires:	perl(Test::Builder) >= 0.860.0
 BuildRequires:	perl(Test::More) >= 0.470.0
 BuildRequires:	perl(Tie::Hash)
-BuildRequires:  sqlite3-devel
+BuildRequires:  sqlite3-devel >= 3.6.0
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
@@ -35,8 +35,11 @@ of SQL92 supported, and more.
 %prep
 %setup -q -n %{upstream_name}-%{upstream_version}_01
 
+# force it to use the system sqlite lib
+rm -f sqlite3.c sqlite3.h
+
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+%{__perl} Makefile.PL INSTALLDIRS=vendor LIBS="-lsqlite3"
 %make CCFLAGS="%{optflags} -DNDEBUG=1 -DSQLITE_PTR_SZ=4"
 
 %check
