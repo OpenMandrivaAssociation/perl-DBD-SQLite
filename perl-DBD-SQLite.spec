@@ -35,15 +35,19 @@ of SQL92 supported, and more.
 %prep
 %setup -q -n %{upstream_name}-%{upstream_version}_01
 
+# really use the system sqlite lib
+perl -pi -e "s|^if \\( 0 \\) \{|if \\( 1 \\) \{|g" Makefile.PL
+perl -pi -e "s|sqlite_base, \'lib\'|sqlite_base, \'%{_lib}\'|g" Makefile.PL
+
 # force it to use the system sqlite lib
 rm -f sqlite3.c sqlite3.h
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor LIBS="-L%{_libdir} -lsqlite3"
+%{__perl} Makefile.PL INSTALLDIRS=vendor LIBS="-L%{_libdir} -lsqlite3" SQLITE_LOCATION="%{_prefix}"
 %make CCFLAGS="%{optflags} -DNDEBUG=1 -DSQLITE_PTR_SZ=4"
 
 %check
-%{__make} test LIBS="-L%{_libdir} -lsqlite3"
+%{__make} test
 
 %install
 rm -rf %{buildroot}
