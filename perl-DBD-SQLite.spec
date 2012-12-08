@@ -1,15 +1,15 @@
-%define upstream_name	 DBD-SQLite
-%define upstream_version 1.36
+%define upstream_name DBD-SQLite
+%define upstream_version 1.37
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	0.3
+Release:	1
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
 Group:		Development/Perl
 URL:		http://search.cpan.org/dist/%{upstream_name}/
-Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}_01.tar.gz
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}.tar.gz
 BuildRequires:	perl-devel
 BuildRequires:	perl(DBI) >= 1.616.0-5
 BuildRequires:	perl(ExtUtils::MakeMaker)
@@ -17,8 +17,7 @@ BuildRequires:	perl(File::Spec) >= 0.820.0
 BuildRequires:	perl(Test::Builder) >= 0.860.0
 BuildRequires:	perl(Test::More) >= 0.470.0
 BuildRequires:	perl(Tie::Hash)
-BuildRequires:  sqlite3-devel >= 3.6.0
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	sqlite3-devel >= 3.6.0
 
 %description
 SQLite is a small fast embedded SQL database engine.
@@ -33,37 +32,173 @@ commit and rollback), indexes, DBA-free operation, a large subset
 of SQL92 supported, and more.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}_01
-
-# really use the system sqlite lib
-perl -pi -e "s|^if \\( 0 \\) \{|if \\( 1 \\) \{|g" Makefile.PL
-perl -pi -e "s|sqlite_base, \'lib\'|sqlite_base, \'%{_lib}\'|g" Makefile.PL
-
-# force it to use the system sqlite lib
-rm -f sqlite3.c sqlite3.h
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor LIBS="-L%{_libdir} -lsqlite3" SQLITE_LOCATION="%{_prefix}"
-%make CCFLAGS="%{optflags} -DNDEBUG=1 -DSQLITE_PTR_SZ=4"
+perl Makefile.PL INSTALLDIRS=vendor
+%make
 
-#%%check
-#%%{__make} test <- needs attention
+%check
+make test
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 # useless content
 rm -f %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.c
 rm -f %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.h
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc README* Changes
 %{perl_vendorarch}/DBD
 %{perl_vendorarch}/auto/DBD
 %{_mandir}/*/*
+
+
+
+%changelog
+* Thu Jan 26 2012 Oden Eriksson <oeriksson@mandriva.com> 1.360.0-0.3
++ Revision: 769166
+- disable the tests for now
+- fix build
+- bump release
+- another try at it...
+- fix build
+- use a pre-release of 1.36
+- rebuilt for perl-5.14.2
+- bump release
+- fix deps (after looking at mageia)
+- 1.35
+- fix deps so that it pulls the latest DBI release
+- force it
+- rebuild
+
+  + Per Øyvind Karlsen <peroyvind@mandriva.org>
+    - svn commit -m mass rebuild of perl extension against perl 5.14.2
+
+* Tue May 31 2011 Guillaume Rousse <guillomovitch@mandriva.org> 1.330.0-1
++ Revision: 682116
+- update to new version 1.33
+
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 1.310.0-2
++ Revision: 667066
+- mass rebuild
+
+* Sat Oct 16 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1.310.0-1mdv2011.0
++ Revision: 586098
+- new version
+
+* Sun Aug 01 2010 Funda Wang <fwang@mandriva.org> 1.290.0-4mdv2011.0
++ Revision: 564402
+- rebuild for perl 5.12.1
+
+* Tue Jul 20 2010 Sandro Cazzaniga <kharec@mandriva.org> 1.290.0-3mdv2011.0
++ Revision: 555461
+- rebuild
+
+  + Jérôme Quelin <jquelin@mandriva.org>
+    - rebuild for 5.12
+
+* Sat Jan 09 2010 Jérôme Quelin <jquelin@mandriva.org> 1.290.0-1mdv2010.1
++ Revision: 487931
+- update to 1.29
+
+* Tue Nov 24 2009 Jérôme Quelin <jquelin@mandriva.org> 1.270.0-1mdv2010.1
++ Revision: 469437
+- update to 1.27
+
+* Fri Jul 17 2009 Jérôme Quelin <jquelin@mandriva.org> 1.250.0-1mdv2010.0
++ Revision: 396886
+- rebuild for new auto provides extraction
+- using %%perl_convert_version
+
+* Thu Apr 30 2009 Jérôme Quelin <jquelin@mandriva.org> 1.25-1mdv2010.0
++ Revision: 369171
+- forgot to add new source
+- update to 1.25
+
+* Sat Mar 07 2009 Antoine Ginies <aginies@mandriva.com> 1.14-6mdv2009.1
++ Revision: 351712
+- rebuild
+
+* Sun Aug 17 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1.14-5mdv2009.0
++ Revision: 273082
+- fix tests, using debian patch
+- re-enable all tests
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Sun Feb 17 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1.14-2mdv2008.1
++ Revision: 169871
+- disable failing tests, as a module with a few issues is better than no module
+  at all
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+    - kill re-definition of %%buildroot on Pixel's request
+
+  + Pixel <pixel@mandriva.com>
+    - rebuild for perl-5.10.0
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+* Fri Oct 12 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.14-1mdv2008.1
++ Revision: 97440
+- update to new version 1.14
+
+
+* Sun Dec 17 2006 Guillaume Rousse <guillomovitch@mandriva.org> 1.13-2mdv2007.0
++ Revision: 98263
+- fix build dependencies
+
+* Sat Dec 16 2006 Guillaume Rousse <guillomovitch@mandriva.org> 1.13-1mdv2007.1
++ Revision: 98198
+- new version
+
+* Tue Aug 08 2006 Olivier Thauvin <nanardon@mandriva.org> 1.12-2mdv2007.0
++ Revision: 53730
+- rebuild
+- Import perl-DBD-SQLite
+
+* Fri Apr 14 2006 Guillaume Rousse <guillomovitch@mandriva.org> 1.12-1mdk
+- New release 1.12
+- better source URL
+- better buildrequires syntax
+
+* Tue Dec 20 2005 Guillaume Rousse <guillomovitch@mandriva.org> 1.11-1mdk
+- new version
+- fix directory ownership
+
+* Tue Sep 27 2005 Guillaume Rousse <guillomovitch@mandriva.org> 1.09-2mdk 
+- rebuild to link against external library
+- spec cleanup
+- %%mkrel
+
+* Wed Jun 22 2005 Rafael Garcia-Suarez <rgarciasuarez@mandriva.com> 1.09-1mdk
+- 1.09
+- spec cleanups
+
+* Mon Mar 14 2005 Rafael Garcia-Suarez <rgarciasuarez@mandrakesoft.com> 1.08-1mdk
+- new veresion 1.08
+
+* Mon Nov 15 2004 Rafael Garcia-Suarez <rgarciasuarez@mandrakesoft.com> 1.07-2mdk 
+- rebuild for new perl
+- remove README.urpmi
+
+* Fri Oct 15 2004 Rafael Garcia-Suarez <rgarciasuarez@mandrakesoft.com> 1.07-1mdk
+- 1.07.
+
+* Wed Aug 11 2004 Rafael Garcia-Suarez <rgarciasuarez@mandrakesoft.com> 1.03-1mdk
+- 1.03.
+- Remove patch 1.
+
+* Thu Jul 29 2004 Rafael Garcia-Suarez <rgarciasuarez@mandrakesoft.com> 1.00-1mdk
+- 1.00, incompatible format with previous versions.
+- Remove MANIFEST, add README.update.urpmi.
+- Patch to prevent interactivity in Makefile.PL
+
+* Tue May 18 2004 Olivier Thauvin <thauvin@aerov.jussieu.fr> 0.31-2mdk
+- Fix compile FLAGS
 
