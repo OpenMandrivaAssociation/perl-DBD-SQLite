@@ -1,15 +1,15 @@
-%define upstream_name DBD-SQLite
-%define upstream_version 1.37
+%define	module	DBD-SQLite
+%define	modver	1.37
 
-Name:		perl-%{upstream_name}
-Version:	%perl_convert_version %{upstream_version}
-Release:	1
+Name:		perl-%{module}
+Version:	%{perl_convert_version %{modver}}
+Release:	2
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
 Group:		Development/Perl
-URL:		http://search.cpan.org/dist/%{upstream_name}/
-Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}.tar.gz
+URL:		http://search.cpan.org/dist/%{module}/
+Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/DBD/%{module}-%{modver}.tar.gz
 BuildRequires:	perl-devel
 BuildRequires:	perl(DBI) >= 1.616.0-5
 BuildRequires:	perl(ExtUtils::MakeMaker)
@@ -32,7 +32,7 @@ commit and rollback), indexes, DBA-free operation, a large subset
 of SQL92 supported, and more.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{module}-%{modver}
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
@@ -45,8 +45,8 @@ make test
 %makeinstall_std
 
 # useless content
-rm -f %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.c
-rm -f %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.h
+rm %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.c
+rm %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.h
 
 %files
 %doc README* Changes
@@ -54,9 +54,10 @@ rm -f %{buildroot}%{perl_vendorarch}/auto/share/dist/DBD-SQLite/sqlite3.h
 %{perl_vendorarch}/auto/DBD
 %{_mandir}/*/*
 
-
-
 %changelog
+* Wed Dec 19 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 1.370.0-2
+- rebuild for new perl
+
 * Thu Jan 26 2012 Oden Eriksson <oeriksson@mandriva.com> 1.360.0-0.3
 + Revision: 769166
 - disable the tests for now
