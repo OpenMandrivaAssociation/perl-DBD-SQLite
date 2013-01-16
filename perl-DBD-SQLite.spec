@@ -17,7 +17,7 @@ BuildRequires:	perl(File::Spec) >= 0.820.0
 BuildRequires:	perl(Test::Builder) >= 0.860.0
 BuildRequires:	perl(Test::More) >= 0.470.0
 BuildRequires:	perl(Tie::Hash)
-BuildRequires:	sqlite3-devel >= 3.6.0
+BuildRequires:	pkgconfig(sqlite3)
 
 %description
 SQLite is a small fast embedded SQL database engine.
