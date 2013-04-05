@@ -1,6 +1,8 @@
 %define	module	DBD-SQLite
 %define	modver	1.37
 
+%define debug_package %{nil}
+
 Name:		perl-%{module}
 Version:	%{perl_convert_version %{modver}}
 Release:	2
