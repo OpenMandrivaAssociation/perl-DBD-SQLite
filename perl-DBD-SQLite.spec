@@ -5,7 +5,7 @@
 
 Name:		perl-%{module}
 Version:	%{perl_convert_version %{modver}}
-Release:	4
+Release:	5
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
