@@ -2,5 +2,6 @@ removed_sources:
   DBD-SQLite-1.37.tar.gz: 80f8079831ccc5199fcabd30eb259e7a71f0271e
   DBD-SQLite-1.40.tar.gz: 4f55414e0e3a29de90fee89eaec4e29b50c72575
   DBD-SQLite-1.42.tar.gz: 02fb90e17dc8c815ed59c73800e54cb99742b21a
-sources:
   DBD-SQLite-1.44.tar.gz: 032f686f23531f12dbca473cb7ad219150f57f7c
+sources:
+  DBD-SQLite-1.46.tar.gz: 1210af99d7010b315e4c4de9fb895ac34bdb22bd
