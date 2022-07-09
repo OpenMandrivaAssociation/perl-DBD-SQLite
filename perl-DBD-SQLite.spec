@@ -1,15 +1,15 @@
 %define upstream_name DBD-SQLite
-%define upstream_version 1.58
+%define upstream_version 1.70
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	3
+Release:	1
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
 Group:		Development/Perl
 URL:		http://search.cpan.org/dist/%{upstream_name}/
-Source0:	ftp://ftp.perl.org:21/pub/CPAN/modules/by-module/DBD/%{upstream_name}-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/I/IS/ISHIGAKI/DBD-SQLite-%{upstream_version}.tar.gz
 BuildRequires:	perl-devel
 BuildRequires:	perl(DBI) >= 1.616.0-5
 BuildRequires:	perl(ExtUtils::MakeMaker)
