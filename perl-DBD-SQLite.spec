@@ -1,6 +1,11 @@
 %define upstream_name DBD-SQLite
 %define upstream_version 1.70
 
+%ifarch %{x86_64}
+# Workaround for debuginfo gen bug
+%global _debugsource_template %{nil}
+%endif
+
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
 Release:	1
