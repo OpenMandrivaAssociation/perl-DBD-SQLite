@@ -3,7 +3,7 @@
 
 Name:		perl-%{upstream_name}
 Version:	1.74
-Release:	1
+Release:	2
 
 Summary:	Self Contained RDBMS in a DBI Driver
 License:	GPL
