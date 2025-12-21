@@ -9,6 +9,7 @@ License:	GPL
 Group:		Development/Perl
 URL:		https://metacpan.org/pod/DBD::SQLite
 Source0:	https://cpan.metacpan.org/authors/id/I/IS/ISHIGAKI/DBD-SQLite-%{version}.tar.gz
+BuildRequires:	make
 BuildRequires:	perl-devel
 BuildRequires:	perl(DBI)
 BuildRequires:	perl(ExtUtils::MakeMaker)
